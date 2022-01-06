@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Months</title>
+</head>
+<body>
+<ul>
+    {% for month in months %}
+        <li><a href="{% url monthly-challenges month %}">{{ month|title }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
