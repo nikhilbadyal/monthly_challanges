@@ -1,14 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Available Months</title>
-</head>
-<body>
-<ul>
-    {% for month in months %}
-        <li><a href="{% url monthly-challenges month %}">{{ month|title }}</a></li>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}
+    Months
+{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'challenges/challenges.css' %}">
+{% endblock %}
+{% block body_content %}
+    <h1>
+        {% include  "challenges/includes/header.html" %}
+
+    </h1>
+    <ul>
+        {% for month in months %}
+            <li><a href="{% url 'monthly-challenges' month %}">{{ month|title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

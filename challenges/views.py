@@ -1,6 +1,7 @@
-from django.http import HttpResponseNotFound, HttpResponseRedirect
-
-# Create your views here.
+"""
+Views
+"""
+from django.http import HttpResponseNotFound, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -16,11 +17,15 @@ monthly_challanges = {
     'september': 'this is september',
     'october': 'this is october',
     'november': 'this is november',
-    'december': 'this is december',
+    'december': None,
 }
 
 
 def list_of_months(request):
+    """
+    :param request:
+    :return:
+    """
     months = monthly_challanges.keys()
 
     return render(request, "challenges/list_of_months.html", {
@@ -29,6 +34,12 @@ def list_of_months(request):
 
 
 def monthly_response_by_number(request, month):
+    """
+
+    :param request:
+    :param month:
+    :return:
+    """
     months = list(monthly_challanges.keys())
     redirect_month = 'Error'
     try:
@@ -49,4 +60,4 @@ def monthly_response(request, month):
             'challenge_text': challenge,
         })
     except:
-        return HttpResponseNotFound('<h1>Month doesn\'t exist on planet Earth YET<h1/>')
+        raise Http404()
